@@ -1,3 +1,3 @@
-var posts=["2025/10/13/模板4/","2025/10/13/模板3/","2025/10/13/模板1/","2025/05/23/模板2/"];function toRandomPost(){
+var posts=["2025/10/14/模板5/","2025/10/13/模板4/","2025/10/13/模板3/","2025/10/13/模板1/","2025/05/23/模板2/"];function toRandomPost(){
     pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);
   };
