@@ -22000,203 +22000,205 @@ a.catalog-more:hover {
   }
 }
 
-/* 春节样式 */
-.chinese-new-year {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  overflow: hidden;
-  display: none;
-}
-
-/* 灯笼样式 - 加大一倍的尺寸 */
-.lantern {
-  position: fixed;
-  z-index: 9998;
-  animation: lanternSwing 3s ease-in-out infinite alternate;
-  transform-origin: top center;
-}
-
-.lantern.left {
-  top: 150px;  /* 调整位置以适应增大的横幅 */
-  left: 3%;
-}
-
-.lantern.right {
-  top: 150px;  /* 调整位置以适应增大的横幅 */
-  right: 3%;
-}
-
-.lantern-body {
-  width: 120px;  /* 加大一倍尺寸 - 从60px到120px */
-  height: 180px;  /* 加大一倍尺寸 - 从90px到180px */
-  background: linear-gradient(to bottom, #ff4500, #ff6347);
-  border-radius: 50% 50% 40% 40%;
-  position: relative;
-  box-shadow: 0 0 35px rgba(255, 69, 0, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 24px;  /* 加大字体 */
-}
-
-.lantern-lid {
-  position: absolute;
-  top: -20px;  /* 加大一倍尺寸 - 从-10px到-20px */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;  /* 加大一倍尺寸 - 从50px到100px */
-  height: 30px;  /* 加大一倍尺寸 - 从15px到30px */
-  background: #b22222;
-  border-radius: 10px;  /* 加大圆角 */
-}
-
-.lantern-bottom {
-  position: absolute;
-  bottom: -16px;  /* 加大一倍尺寸 - 从-8px到-16px */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;  /* 加大一倍尺寸 - 从20px到40px */
-  height: 10px;  /* 加大一倍尺寸 - 从5px到10px */
-  background: #b22222;
-  border-radius: 5px;  /* 加大圆角 */
-}
-
-.lantern-chain {
-  position: absolute;
-  top: -40px;  /* 加大一倍尺寸 - 从-20px到-40px */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;  /* 加大一倍尺寸 - 从2px到4px */
-  height: 40px;  /* 加大一倍尺寸 - 从20px到40px */
-  background: #b22222;
-}
-
-.lantern-red-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 24px;  /* 加大字体 */
-  font-weight: bold;
-  text-align: center;
-  width: 100%;
-}
-
-@keyframes lanternSwing {
-  0% {
-    transform: rotate(-5deg);
+/* 春节样式 - 仅在电脑端显示 */
+@media screen and (min-width: 768px) {
+  .chinese-new-year {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+    display: none;
   }
-  100% {
-    transform: rotate(5deg);
+
+  /* 灯笼样式 - 加大一倍的尺寸，位置低于横幅 */
+  .lantern {
+    position: fixed;
+    z-index: 9998;
+    animation: lanternSwing 3s ease-in-out infinite alternate;
+    transform-origin: top center;
   }
-}
 
-/* 烟花样式 */
-.firework {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  pointer-events: none;
-  display: none;
-}
-
-/* 节日横幅 - 与侧边栏卡片上边缘对齐，增加高度 */
-.spring-festival-banner {
-  position: fixed;
-  top: 120px;  /* 调整位置与侧边栏卡片上边缘对齐 */
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(45deg, #b22222, #ff4500, #b22222);
-  color: white;
-  text-align: center;
-  padding: 20px 50px;  /* 加大一倍 - 从10px 25px到20px 50px */
-  font-size: 20px;  /* 加大字体 - 从16px到20px */
-  font-weight: bold;
-  z-index: 50;  /* 设置更低的层级，低于菜单的z-index:100 */
-  display: none;
-  border-radius: 35px;  /* 加大圆角 - 从25px到35px */
-  box-shadow: 0 6px 25px rgba(178, 34, 34, 0.6);
-  animation: bannerGlow 2s ease-in-out infinite alternate;
-  min-width: 300px;  /* 增加最小宽度 */
-  max-width: 80%;
-  backdrop-filter: blur(15px);  /* 增加模糊效果 */
-  border: 2px solid rgba(255, 255, 255, 0.3);  /* 加粗边框 */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* 与侧边栏卡片上边缘对齐，但层级低于菜单 */
-}
-
-@keyframes bannerGlow {
-  from {
-    box-shadow: 0 0 10px rgba(255, 69, 0, 0.6);
+  .lantern.left {
+    top: 180px;  /* 位置低于横幅 - 从150px增加到180px */
+    left: 3%;
   }
-  to {
-    box-shadow: 0 0 30px rgba(255, 69, 0, 0.9);
+
+  .lantern.right {
+    top: 180px;  /* 位置低于横幅 - 从150px增加到180px */
+    right: 3%;
   }
-}
 
-/* 新年祝福弹窗 */
-.new-year-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border-radius: 15px;
-  padding: 30px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  z-index: 10000;
-  display: none;
-  min-width: 300px;
-}
+  .lantern-body {
+    width: 120px;  /* 加大一倍尺寸 - 从60px到120px */
+    height: 180px;  /* 加大一倍尺寸 - 从90px到180px */
+    background: linear-gradient(to bottom, #ff4500, #ff6347);
+    border-radius: 50% 50% 40% 40%;
+    position: relative;
+    box-shadow: 0 0 35px rgba(255, 69, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;  /* 加大字体 */
+  }
 
-.new-year-popup h2 {
-  color: #b22222;
-  margin-top: 0;
-}
+  .lantern-lid {
+    position: absolute;
+    top: -20px;  /* 加大一倍尺寸 - 从-10px到-20px */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;  /* 加大一倍尺寸 - 从50px到100px */
+    height: 30px;  /* 加大一倍尺寸 - 从15px到30px */
+    background: #b22222;
+    border-radius: 10px;  /* 加大圆角 */
+  }
 
-.new-year-popup-content {
-  color: #333;
-  font-size: 16px;
-  margin: 15px 0;
-}
+  .lantern-bottom {
+    position: absolute;
+    bottom: -16px;  /* 加大一倍尺寸 - 从-8px到-16px */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;  /* 加大一倍尺寸 - 从20px到40px */
+    height: 10px;  /* 加大一倍尺寸 - 从5px到10px */
+    background: #b22222;
+    border-radius: 5px;  /* 加大圆角 */
+  }
 
-/* 庆祝按钮样式 */
-.celebration-btn {
-  background: linear-gradient(to bottom, #ff4500, #b22222);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s;
-}
+  .lantern-chain {
+    position: absolute;
+    top: -40px;  /* 加大一倍尺寸 - 从-20px到-40px */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;  /* 加大一倍尺寸 - 从2px到4px */
+    height: 40px;  /* 加大一倍尺寸 - 从20px到40px */
+    background: #b22222;
+  }
 
-.celebration-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255, 69, 0, 0.7);
-}
+  .lantern-red-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;  /* 加大字体 */
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+  }
 
-/* 鼠标点击烟花特效 */
-.click-firework {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9996;
+  @keyframes lanternSwing {
+    0% {
+      transform: rotate(-5deg);
+    }
+    100% {
+      transform: rotate(5deg);
+    }
+  }
+
+  /* 烟花样式 */
+  .firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    pointer-events: none;
+    display: none;
+  }
+
+  /* 节日横幅 - 与侧边栏卡片上边缘对齐，增加高度 */
+  .spring-festival-banner {
+    position: fixed;
+    top: 120px;  /* 调整位置与侧边栏卡片上边缘对齐 */
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #b22222, #ff4500, #b22222);
+    color: white;
+    text-align: center;
+    padding: 20px 50px;  /* 加大一倍 - 从10px 25px到20px 50px */
+    font-size: 20px;  /* 加大字体 - 从16px到20px */
+    font-weight: bold;
+    z-index: 50;  /* 设置更低的层级，低于菜单的z-index:100 */
+    display: none;
+    border-radius: 35px;  /* 加大圆角 - 从25px到35px */
+    box-shadow: 0 6px 25px rgba(178, 34, 34, 0.6);
+    animation: bannerGlow 2s ease-in-out infinite alternate;
+    min-width: 300px;  /* 增加最小宽度 */
+    max-width: 80%;
+    backdrop-filter: blur(15px);  /* 增加模糊效果 */
+    border: 2px solid rgba(255, 255, 255, 0.3);  /* 加粗边框 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* 与侧边栏卡片上边缘对齐，但层级低于菜单 */
+  }
+
+  @keyframes bannerGlow {
+    from {
+      box-shadow: 0 0 10px rgba(255, 69, 0, 0.6);
+    }
+    to {
+      box-shadow: 0 0 30px rgba(255, 69, 0, 0.9);
+    }
+  }
+
+  /* 新年祝福弹窗 */
+  .new-year-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    display: none;
+    min-width: 300px;
+  }
+
+  .new-year-popup h2 {
+    color: #b22222;
+    margin-top: 0;
+  }
+
+  .new-year-popup-content {
+    color: #333;
+    font-size: 16px;
+    margin: 15px 0;
+  }
+
+  /* 庆祝按钮样式 */
+  .celebration-btn {
+    background: linear-gradient(to bottom, #ff4500, #b22222);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+
+  .celebration-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.7);
+  }
+
+  /* 鼠标点击烟花特效 */
+  .click-firework {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9996;
+  }
 }
 /*和风天气 */
 #he-plugin-simple {
