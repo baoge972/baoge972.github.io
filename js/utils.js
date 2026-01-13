@@ -703,25 +703,30 @@ const anzhiyu = {
   musicSwitchOrder: function () {
     const navMusicAplayer = navMusicEl.querySelector("meting-js").aplayer;
     const orders = ['list', 'single', 'shuffle']; // 列表循环、单曲循环、随机播放
-    const currentIndex = orders.indexOf(navMusicAplayer.options.mode || navMusicAplayer.options.order);
-    const nextIndex = (currentIndex + 1) % orders.length;
-    navMusicAplayer.setMode && navMusicAplayer.setMode(orders[nextIndex]);
+    // 使用aplayer的当前模式，而不是options中的值
+    let currentMode = 'list'; // 默认值
       
-    // 更新按钮图标提示
-    anzhiyu.updatePlayModeIcon(navMusicAplayer, orders[nextIndex]);
+    // 尝试获取当前播放模式
+    if (navMusicAplayer && navMusicAplayer.list && navMusicAplayer.list.audios && navMusicAplayer.list.index !== undefined) {
+      // 从aplayer实例获取当前模式
+      currentMode = navMusicAplayer.mode || navMusicAplayer.options.mode || 'list';
+    }
+      
+    const currentIndex = orders.indexOf(currentMode);
+    const nextIndex = (currentIndex + 1) % orders.length;
+    const nextMode = orders[nextIndex];
+      
+    // 设置新模式
+    if (navMusicAplayer && typeof navMusicAplayer.setMode === 'function') {
+      navMusicAplayer.setMode(nextMode);
+    }
+      
+    // 不再显示提示
   },
     
   // 更新播放模式图标
   updatePlayModeIcon: function(aplayer, mode) {
-    // 根据模式更新图标显示
-    const modeIcons = {
-      'list': '列表循环',
-      'single': '单曲循环',
-      'shuffle': '随机播放'
-    };
-      
-    // 显示提示
-    anzhiyu.snackbarShow(modeIcons[mode] || '未知模式');
+    // 此函数不再被调用，保留以防止其他地方引用
   },
 
   //初始化console图标
@@ -1190,6 +1195,8 @@ const anzhiyu = {
         anzhiyu.musicSkipForward();
       });
     }
+    
+    // 移除音量控制的点击事件，避免干扰操作
   },
 
   // 判断是否是移动端

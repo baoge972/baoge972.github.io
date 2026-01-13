@@ -22784,7 +22784,7 @@ body:has(#console.show) #nav-music .aplayer.aplayer-withlrc .aplayer-lrc {
 }
 body:has(#console.show) #nav-music .aplayer .aplayer-lrc p.aplayer-lrc-current,
 body:has(#console.show) #nav-music .aplayer .aplayer-lrc p {
-  color: var(--anzhiyu-fontcolor);
+  color: var(--anzhiyu-fontcolor) !important;
 }
 body:has(#console.show) #nav-music #nav-music-hoverTips {
   opacity: 0;
@@ -23969,14 +23969,15 @@ i.bber-gotobb {
 }
 
 #nav-music .aplayer {
-  background: var(--card-bg);
+  background: rgba(255, 255, 255, 0.15) !important;
   border-radius: 60px;
   height: 41px;
   display: flex;
   margin: 0;
   transition: 0.3s;
   border: var(--style-border);
-  box-shadow: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 #nav-music.playing .aplayer {
@@ -23985,6 +23986,7 @@ i.bber-gotobb {
   backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: blur(20px);
   transform: translateZ(0);
+  opacity: 0.9;
 }
 
 #nav-music .aplayer .aplayer-notice {
@@ -24034,6 +24036,17 @@ i.bber-gotobb {
   margin: 0;
   transition: 0.3s;
 }
+
+/* 播放模式按钮样式 */
+#nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-loop {
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+#nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-loop:hover {
+  opacity: 1;
+  color: var(--anzhiyu-main);
+}
 #nav-music .aplayer .aplayer-pic:has(.aplayer-button.aplayer-play) {
   animation-play-state: paused;
   transform: rotate(0deg) scale(1) !important;
@@ -24063,25 +24076,45 @@ i.bber-gotobb {
 }
 
 #nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap {
-  margin: 0;
-  padding: 0;
+  margin: 0 10px;
+  padding: 5px 0;
 }
 
 #nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
-  height: 100%;
-  background: 0 0;
+  height: 4px;
+  background: rgba(128, 128, 128, 0.4);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
 }
 
 #nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
-  display: none;
+  height: 100%;
+  width: 0;
+  background: rgba(128, 128, 128, 0.6);
+  opacity: 1;
+  border-radius: 2px;
 }
 
 #nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
   height: 100%;
-  opacity: 0.1;
-  background-color: var(--anzhiyu-white) !important;
-  animation: lightBar 5s ease infinite;
-  animation-play-state: paused;
+  width: 0;
+  background-color: #425AEF !important; /* 使用固定颜色，避免与主色调混淆 */
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+#nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+  position: absolute;
+  right: -5px;
+  top: -4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--anzhiyu-white);
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
+  display: none;
 }
 
 #nav-music.playing .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
@@ -24132,12 +24165,19 @@ i.bber-gotobb {
   flex-direction: column;
   align-items: stretch;
   color: var(--anzhiyu-fontcolor);
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* 确保控制器按钮可见 */
-#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-time,
-#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap {
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-time {
   display: block !important;
+}
+
+/* 隐藏音量控制，因为操作不便 */
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap {
+  display: none !important;
 }
 
 #nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap {
@@ -24150,12 +24190,26 @@ i.bber-gotobb {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-direction: column;
+  padding: 5px 0 10px;
 }
 
 #nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-time {
   display: flex !important;
   align-items: center;
   gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* 展开模式下进度条样式 */
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap {
+  width: 100%;
+  margin: 15px 0;
+}
+
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb {
+  display: block;
 }
 
 /* 确保按钮在展开状态下可见 */
@@ -24165,8 +24219,10 @@ i.bber-gotobb {
   display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
-  color: var(--anzhiyu-fontcolor);
-  filter: brightness(1.2);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 5px;
 }
 
 /* 播放模式按钮颜色优化 */
@@ -24199,8 +24255,9 @@ i.bber-gotobb {
   display: block !important;
   max-height: 200px;
   overflow-y: auto;
-  background: var(--anzhiyu-background);
+  background: rgba(0, 0, 0, 0.2) !important;
   border-radius: 0 0 12px 12px;
+  backdrop-filter: blur(5px);
 }
 
 #nav-music.stretch .aplayer .aplayer-list ol {
@@ -24246,7 +24303,7 @@ i.bber-gotobb {
 }
 
 #nav-music .aplayer .aplayer-lrc p.aplayer-lrc-current {
-  color: var(--anzhiyu-white);
+  color: var(--anzhiyu-fontcolor);
   border: none;
   min-height: 20px;
 }
@@ -24257,11 +24314,12 @@ i.bber-gotobb {
 }
 
 #nav-music .aplayer .aplayer-lrc p {
-  color: #ffffffb3;
+  color: var(--anzhiyu-fontcolor);
   line-height: 40px !important;
   height: 40px !important;
   margin: 0px 0;
   vertical-align: top;
+  opacity: 0.6;
   /* display: inline-block; */
 }
 
