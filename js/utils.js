@@ -689,7 +689,7 @@ const anzhiyu = {
     rm && rm.hideRightMenu();
   },
 
-  //获取音乐中的名称
+  // 获取音乐中的名称
   musicGetName: function () {
     var x = document.querySelectorAll(".aplayer-title");
     var arr = [];
@@ -697,6 +697,31 @@ const anzhiyu = {
       arr[i] = x[i].innerText;
     }
     return arr[0];
+  },
+  
+  // 切换播放模式
+  musicSwitchOrder: function () {
+    const navMusicAplayer = navMusicEl.querySelector("meting-js").aplayer;
+    const orders = ['list', 'single', 'shuffle']; // 列表循环、单曲循环、随机播放
+    const currentIndex = orders.indexOf(navMusicAplayer.options.mode || navMusicAplayer.options.order);
+    const nextIndex = (currentIndex + 1) % orders.length;
+    navMusicAplayer.setMode && navMusicAplayer.setMode(orders[nextIndex]);
+      
+    // 更新按钮图标提示
+    anzhiyu.updatePlayModeIcon(navMusicAplayer, orders[nextIndex]);
+  },
+    
+  // 更新播放模式图标
+  updatePlayModeIcon: function(aplayer, mode) {
+    // 根据模式更新图标显示
+    const modeIcons = {
+      'list': '列表循环',
+      'single': '单曲循环',
+      'shuffle': '随机播放'
+    };
+      
+    // 显示提示
+    anzhiyu.snackbarShow(modeIcons[mode] || '未知模式');
   },
 
   //初始化console图标
@@ -1129,7 +1154,7 @@ const anzhiyu = {
     // 点击播放器整体展开/收起
     document.querySelector("#nav-music .aplayer").addEventListener("click", function (e) {
       // 防止点击播放/暂停按钮时触发展开
-      if (!e.target.closest('.aplayer-button')) {
+      if (!e.target.closest('.aplayer-button') && !e.target.closest('.aplayer-icon-loop') && !e.target.closest('.aplayer-icon-menu') && !e.target.closest('.aplayer-icon-prev') && !e.target.closest('.aplayer-icon-next')) {
         anzhiyu.musicTelescopic();
       }
     });
@@ -1141,6 +1166,30 @@ const anzhiyu = {
     document.querySelector("#nav-music .aplayer-button").addEventListener("click", function () {
       anzhiyu.musicToggle(false);
     });
+    
+    // 绑定播放模式切换按钮事件
+    if (document.querySelector("#nav-music .aplayer-icon-loop")) {
+      document.querySelector("#nav-music .aplayer-icon-loop").addEventListener("click", function(e) {
+        e.stopPropagation();
+        anzhiyu.musicSwitchOrder();
+      });
+    }
+    
+    // 绑定上一曲按钮事件
+    if (document.querySelector("#nav-music .aplayer-icon-prev")) {
+      document.querySelector("#nav-music .aplayer-icon-prev").addEventListener("click", function(e) {
+        e.stopPropagation();
+        anzhiyu.musicSkipBack();
+      });
+    }
+    
+    // 绑定下一曲按钮事件
+    if (document.querySelector("#nav-music .aplayer-icon-next")) {
+      document.querySelector("#nav-music .aplayer-icon-next").addEventListener("click", function(e) {
+        e.stopPropagation();
+        anzhiyu.musicSkipForward();
+      });
+    }
   },
 
   // 判断是否是移动端

@@ -23825,6 +23825,12 @@ i.bber-gotobb {
     left: 10px;
     z-index: 9999;
   }
+  
+  /* 移动端播放器按钮颜色优化 */
+  #nav-music .aplayer .aplayer-info .aplayer-music .aplayer-title,
+  #nav-music .aplayer .aplayer-info .aplayer-music .aplayer-author {
+    color: var(--anzhiyu-fontcolor) !important;
+  }
 }
 
 #nav-music {
@@ -24045,6 +24051,7 @@ i.bber-gotobb {
   text-overflow: ellipsis;
   transition: 0.3s;
   user-select: none;
+  color: var(--anzhiyu-fontcolor);
 }
 
 #nav-music .aplayer .aplayer-info .aplayer-controller {
@@ -24121,9 +24128,50 @@ i.bber-gotobb {
 #nav-music.stretch .aplayer {
   border-radius: 12px;
   height: auto;
-  min-height: 41px;
+  min-height: 150px;
   flex-direction: column;
   align-items: stretch;
+  color: var(--anzhiyu-fontcolor);
+}
+
+/* 确保控制器按钮可见 */
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-time,
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap {
+  display: block !important;
+}
+
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap {
+  margin: 0 10px;
+  flex: 1;
+}
+
+/* 展开模式下的控制按钮布局 */
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-time {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 确保按钮在展开状态下可见 */
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-icon-loop,
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-icon-prev,
+#nav-music.stretch .aplayer .aplayer-info .aplayer-controller .aplayer-icon-next {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: var(--anzhiyu-fontcolor);
+  filter: brightness(1.2);
+}
+
+/* 播放模式按钮颜色优化 */
+#nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon.aplayer-icon-loop {
+  color: var(--anzhiyu-fontcolor);
 }
 
 #nav-music.stretch .aplayer .aplayer-info {
@@ -24142,6 +24190,9 @@ i.bber-gotobb {
   padding: 10px;
   width: 100%;
   position: static;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #nav-music.stretch .aplayer .aplayer-list {
@@ -24162,6 +24213,7 @@ i.bber-gotobb {
   border-bottom: 1px solid var(--anzhiyu-secondbg);
   cursor: pointer;
   transition: all 0.3s ease;
+  color: var(--anzhiyu-fontcolor);
 }
 
 #nav-music.stretch .aplayer .aplayer-list ol li:hover {
