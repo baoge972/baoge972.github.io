@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let festivalMessage = '';
   
   // 春节（农历新年，这里使用公历日期作为示例，可调整）
-  if ((month === 1 && day >= 10 && day <= 31) || (month === 2 && day <= 20)) {
+  if ((month === 1 && day >= 12 && day <= 31) || (month === 2 && day <= 20)) {
     festivalType = 'spring_festival';
     festivalMessage = '🎊 新年快乐！恭贺新春！🎊';
   }
@@ -68,6 +68,13 @@ function createFestivalElements(festivalType, festivalMessage) {
       <div class="lantern-red-text">${getFestivalSymbol(festivalType, 'left')}</div>
     </div>
     <div class="lantern-bottom"></div>
+    <div class="lantern-tassel">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   `;
   document.body.appendChild(leftDecoration);
 
@@ -80,6 +87,13 @@ function createFestivalElements(festivalType, festivalMessage) {
       <div class="lantern-red-text">${getFestivalSymbol(festivalType, 'right')}</div>
     </div>
     <div class="lantern-bottom"></div>
+    <div class="lantern-tassel">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   `;
   document.body.appendChild(rightDecoration);
 
@@ -113,7 +127,7 @@ function addBackgroundDecorations(festivalType) {
       decorationItems = ['🇨🇳', '🎉', '国旗', '🌟', '爱国', '🇨🇳', '🎉', '🌟'];
       break;
     case 'mid_autumn':
-      decorationItems = ['🥮', '🌕', '兔子', '桂花', '🌙', '🥮', '🌕', '🎑'];
+      decorationItems = ['🥮', '🌕', '兔子', '桂花', '🌙', '月饼', '🌕', '🎑'];
       break;
     case 'new_year':
       decorationItems = ['🎆', '✨', '🎉', '🍾', '2025', '🎆', '✨', '🎉'];
