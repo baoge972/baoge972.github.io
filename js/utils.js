@@ -1126,7 +1126,16 @@ const anzhiyu = {
 
   // 音乐绑定事件
   musicBindEvent: function () {
-    document.querySelector("#nav-music .aplayer-music").addEventListener("click", function () {
+    // 点击播放器整体展开/收起
+    document.querySelector("#nav-music .aplayer").addEventListener("click", function (e) {
+      // 防止点击播放/暂停按钮时触发展开
+      if (!e.target.closest('.aplayer-button')) {
+        anzhiyu.musicTelescopic();
+      }
+    });
+    // 点击歌曲名称也可以展开/收起
+    document.querySelector("#nav-music .aplayer-music").addEventListener("click", function (e) {
+      e.stopPropagation(); // 阻止冒泡，防止重复触发
       anzhiyu.musicTelescopic();
     });
     document.querySelector("#nav-music .aplayer-button").addEventListener("click", function () {
