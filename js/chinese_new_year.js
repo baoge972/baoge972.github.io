@@ -1,5 +1,10 @@
 // 节日特效脚本 - 支持春节、国庆节、中秋节等多个节日
 document.addEventListener('DOMContentLoaded', function() {
+  // 检测当前设备宽度，仅在桌面端运行节日特效
+  if (window.innerWidth < 768) {
+    return; // 手机端不执行节日特效
+  }
+  
   // 检测当前日期并确定节日类型
   const now = new Date();
   const month = now.getMonth() + 1;
@@ -10,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let festivalMessage = '';
   
   // 春节（农历新年，这里使用公历日期作为示例，可调整）
-  if ((month === 1 && day >= 12 && day <= 31) || (month === 2 && day <= 20)) {
+  if ((month === 1 && day >= 10 && day <= 31) || (month === 2 && day <= 20)) {
     festivalType = 'spring_festival';
     festivalMessage = '🎊 新年快乐！恭贺新春！🎊';
   }
@@ -27,12 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // 元旦
   else if (month === 1 && day === 1) {
     festivalType = 'new_year';
-    festivalMessage = '🎆 新年快乐！Happy New Year！🎆';
+    festivalMessage = '🎆 新年快乐！Happy New Year！ 🎉';
   }
   // 永久显示模式（开发测试用）
   else if (false) { // 将false改为true可永久显示
     festivalType = 'spring_festival';
-    festivalMessage = '🎊 节日快乐！欢度佳节！🎊';
+    festivalMessage = ' byte 节日快乐！欢度佳节！ byte';
   }
   
   if (festivalType) {
@@ -127,13 +132,13 @@ function addBackgroundDecorations(festivalType) {
       decorationItems = ['🇨🇳', '🎉', '国旗', '🌟', '爱国', '🇨🇳', '🎉', '🌟'];
       break;
     case 'mid_autumn':
-      decorationItems = ['🥮', '🌕', '兔子', '桂花', '🌙', '月饼', '🌕', '🎑'];
+      decorationItems = ['🥮', '🌕', '兔子', '桂花', '🌙', '月饼', '🌕', ' 🎉'];
       break;
     case 'new_year':
-      decorationItems = ['🎆', '✨', '🎉', '🍾', '2025', '🎆', '✨', '🎉'];
+      decorationItems = [' 🎉', ' 🎉', '🎉', ' 🎉', '2025', ' 🎉', ' 🎉', '🎉'];
       break;
     default:
-      decorationItems = ['🎊', '🎉', '✨', '🎁', '🎈', '🎊', '🎉', '✨'];
+      decorationItems = ['🎊', '🎉', ' 🎉', '🎁', '🎈', '🎊', '🎉', ' 🎉'];
   }
 
   // 创建一些飘落的装饰元素
@@ -224,24 +229,24 @@ function showFestivalMessage(festivalType) {
   const popup = document.createElement('div');
   popup.className = 'new-year-popup';
   
-  let title = '🎉 节日快乐 🎉';
+  let title = ' 🎉 节日快乐 🎉';
   let content = '<p>恭祝您：</p><p>身体健康，工作顺利！</p><p>家庭幸福，万事如意！</p><p>节日愉快，心想事成！</p>';
   
   switch(festivalType) {
     case 'spring_festival':
-      title = '🎉 新年快乐 🎉';
-      content = '<p>恭祝您：</p><p>身体健康，工作顺利！</p><p>家庭幸福，万事如意！</p><p>龙年大吉，财源广进！</p>';
+      title = ' 🎉 新年快乐 🎉';
+      content = '<p>恭祝您：</p><p>身体健康，工作顺利！</p><p>家庭幸福，万事如意！</p><p>新春大吉，财源广进！</p>';
       break;
     case 'national_day':
-      title = '🎉 国庆快乐 🎉';
+      title = ' 🎉 国庆快乐 🎉';
       content = '<p>欢度国庆：</p><p>祝福祖国繁荣昌盛！</p><p>人民幸福安康！</p><p>国泰民安，盛世华章！</p>';
       break;
     case 'mid_autumn':
-      title = '🎑 中秋快乐 🎑';
+      title = ' 🎑 中秋快乐 🎑';
       content = '<p>中秋祝福：</p><p>月圆人团圆！</p><p>阖家欢乐！</p><p>花好月圆夜！</p>';
       break;
     case 'new_year':
-      title = '🎆 新年快乐 🎆';
+      title = ' 🎆 新年快乐 🎆';
       content = '<p>新年祝福：</p><p>新年新气象！</p><p>事业更辉煌！</p><p>Happy New Year！</p>';
       break;
   }
@@ -260,6 +265,11 @@ function showFestivalMessage(festivalType) {
 
 // 添加一个开关函数，允许手动开启/关闭节日特效
 function toggleFestival() {
+  // 检测当前设备宽度，仅在桌面端运行
+  if (window.innerWidth < 768) {
+    return; // 手机端不执行节日特效
+  }
+  
   const banners = document.querySelectorAll('.spring-festival-banner');
   const lanterns = document.querySelectorAll('.lantern');
   const popups = document.querySelectorAll('.new-year-popup');
@@ -272,6 +282,6 @@ function toggleFestival() {
     popups.forEach(el => el.remove());
   } else {
     // 否则创建春节元素（默认）
-    initFestivalEffects('spring_festival', '🎊 新年快乐！恭贺新春！🎊');
+    initFestivalEffects('spring_festival', ' byte 节日快乐！恭贺新春！ byte');
   }
 }
